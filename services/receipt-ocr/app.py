@@ -9,12 +9,12 @@ import datetime
 import time
 
 REGION = "ap-south-1"
-S3_ENDPOINT = os.getenv('S3_ENDPOINT')
+S3_ENDPOINT = os.getenv('arn:aws:s3:::ledgerly-receipt-bucket')
 DB_CONFIG = {
-    "host": os.getenv('DB_HOST'),
-    "database": "testdb",
-    "user": os.getenv('DB_USER'),
-    "password": os.getenv('DB_PASS'),
+    "host": os.getenv('ldb.c1kqeyuisvgw.ap-south-1.rds.amazonaws.com'),
+    "database": "ldb",
+    "user": os.getenv('postgre'),
+    "password": os.getenv('password'),
     "port": 5432
 }
 
@@ -35,7 +35,7 @@ Requirements:
 
 def init_services():
     """Initialize AWS and Gemini services"""
-    genai.configure(api_key=os.getenv("API_KEY"))
+    genai.configure(api_key=os.getenv("AIzaSyDNK2BuaQoDNsyxuSQO53CCE43R-XwNApo"))
     return (
         boto3.client('s3', region_name=REGION),
         genai.GenerativeModel(model_name="gemini-1.5-flash")
@@ -115,4 +115,3 @@ def lambda_handler(event, context=None):
             return {"statusCode": 500, "body": json.dumps(error_msg)}
 
     return {"statusCode": 200, "body": json.dumps("Processing complete")}
-
