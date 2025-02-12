@@ -12,11 +12,11 @@ class Settings(BaseSettings):
         extra='ignore'
     )
 
-    POSTGRES_SERVER: str = ""
+    POSTGRES_SERVER: str = "ldb1.c1kqeyuisvgw.ap-south-1.rds.amazonaws.com"
     POSTGRES_PORT: int = 5432
-    POSTGRES_USER: str = ""
-    POSTGRES_PASSWORD: str = ""
-    POSTGRES_DB: str = ""
+    POSTGRES_USER: str = "postgres"
+    POSTGRES_PASSWORD: str = "password"
+    POSTGRES_DB: str = "ldb"
 
     @computed_field  # type: ignore[prop-decorator]
     @property
@@ -29,7 +29,7 @@ class Settings(BaseSettings):
             port=self.POSTGRES_PORT,
             path=self.POSTGRES_DB,
         )
-    
+
     S3_BUCKET: str
     REGION: str = "ap-south-1"
 
